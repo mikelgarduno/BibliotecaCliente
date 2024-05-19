@@ -99,4 +99,42 @@ void enviarComandoRegistrarLibro(SOCKET* s, Libro& l){
 	strcpy(sendBuffer, l.getContenido());
 	send(*s, sendBuffer, strlen(sendBuffer), 0);
 }
+void enviarComandoRegistrarCategoria(SOCKET* s, Categoria& c) {
+    char sendBuffer[1024];
+    char recvBuffer[1024];
 
+    strcpy(sendBuffer, "REGISTRAR_CATEGORIA");
+    send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+    strcpy(sendBuffer, c.getName());
+    send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+    int bytesRecibidos = recv(*s, recvBuffer, 1024, 0);
+    if (bytesRecibidos > 0) {
+        recvBuffer[bytesRecibidos] = '\0';
+        printf("Respuesta del servidor: %s\n", recvBuffer);
+	}
+}
+
+void enviarComandoRegistrarEditorial(SOCKET* s, Editorial& e) {
+    char sendBuffer[1024];
+    char recvBuffer[1024];
+
+    strcpy(sendBuffer, "REGISTRAR_EDITORIAL");
+    send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+    strcpy(sendBuffer, e.getName());
+    send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+    strcpy(sendBuffer, e.getFecha());
+    send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+    // Aquí puedes agregar más campos de la editorial si los hay
+
+    // Recibir la respuesta del servidor
+    int bytesRecibidos = recv(*s, recvBuffer, 1024, 0);
+    if (bytesRecibidos > 0) {
+        recvBuffer[bytesRecibidos] = '\0'; // Asegurarse de que la cadena esté terminada
+        printf("Respuesta del servidor: %s\n", recvBuffer);
+    }
+}
