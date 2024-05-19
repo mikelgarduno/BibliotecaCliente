@@ -8,15 +8,17 @@
 #define SOCKET_H_
 
 #include <winsock2.h>
+#include "../include/Autor.h"
+#include "../include/Libro.h"
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
 
 int inicializarSocket(SOCKET* s);
-//void registrarAutor(Autor);
-//void registrarCategoria(Categoria);
-//void registrarLibro(Libro);
-//void registrarEditorial(Editorial);
+void enviarComandoRegistrarAutor(SOCKET* s, Autor& a);
+void enviarComandoRegistrarLibro(SOCKET* s, Libro& l);
+//void enviarComandoRegistrarCategoria(SOCKET* s, Categoria& c);
+//void enviarComandoRegistrarEditorial(SOCKET* s, Editorial& e);
 //void mandarBorrado();
 
 #endif /* SOCKET_H_ */

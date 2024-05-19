@@ -6,7 +6,11 @@
  */
 #include <winsock2.h>
 #include "socket.h"
+#include "../include/Autor.h"
+#include "../include/Libro.h"
 #include <iostream>
+
+
 using namespace std;
 
 int inicializarSocket(SOCKET* s){
@@ -46,5 +50,53 @@ int inicializarSocket(SOCKET* s){
 	return 0;
 }
 
+void enviarComandoRegistrarAutor(SOCKET* s, Autor& a){
+	char sendBuffer[1024];
+	char recvBuffer[1024];
 
+	strcpy(sendBuffer, "REGISTRAR_AUTOR");
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+	strcpy(sendBuffer, a.getName());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+	strcpy(sendBuffer, a.getDate());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+	strcpy(sendBuffer, a.getPlace());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+}
+
+void enviarComandoRegistrarLibro(SOCKET* s, Libro& l){
+	char sendBuffer[1024]; char recvBuffer[1024];
+	strcpy(sendBuffer, "REGISTRAR_LIBRO");
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+	strcpy(sendBuffer, l.getTitulo());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+	strcpy(sendBuffer, l.getIsbn());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+	strcpy(sendBuffer, l.getAutor()->getName());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	strcpy(sendBuffer, l.getAutor()->getDate());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	strcpy(sendBuffer, l.getAutor()->getPlace());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+	strcpy(sendBuffer, l.getEditorial()->getName());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	strcpy(sendBuffer, l.getEditorial()->getFecha());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+	strcpy(sendBuffer, l.getFechaCreacion());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+	strcpy(sendBuffer, l.getCategoria()->getName());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+
+	strcpy(sendBuffer, l.getContenido());
+	send(*s, sendBuffer, strlen(sendBuffer), 0);
+}
 
