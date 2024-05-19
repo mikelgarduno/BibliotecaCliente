@@ -129,12 +129,9 @@ void enviarComandoRegistrarEditorial(SOCKET* s, Editorial& e) {
     strcpy(sendBuffer, e.getFecha());
     send(*s, sendBuffer, strlen(sendBuffer), 0);
 
-    // Aquí puedes agregar más campos de la editorial si los hay
-
-    // Recibir la respuesta del servidor
     int bytesRecibidos = recv(*s, recvBuffer, 1024, 0);
     if (bytesRecibidos > 0) {
-        recvBuffer[bytesRecibidos] = '\0'; // Asegurarse de que la cadena esté terminada
+        recvBuffer[bytesRecibidos] = '\0';
         printf("Respuesta del servidor: %s\n", recvBuffer);
     }
 }
