@@ -19,6 +19,12 @@ void enviarComandoRegistrarAutor(SOCKET* s, Autor& a);
 void enviarComandoRegistrarLibro(SOCKET* s, Libro& l);
 void enviarComandoRegistrarCategoria(SOCKET* s, Categoria& c);
 void enviarComandoRegistrarEditorial(SOCKET* s, Editorial& e);
-//void mandarBorrado();
+void mandarBorrado();
+
+Autor* pedirListaAutores ();
+Libro* pedirListaLibros ();
+Categoria* pedirListaCategorias ();
+Editorial* pedirListaAutores ();
+
 
 #endif /* SOCKET_H_ */

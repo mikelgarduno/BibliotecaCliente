@@ -135,3 +135,13 @@ void enviarComandoRegistrarEditorial(SOCKET* s, Editorial& e) {
         printf("Respuesta del servidor: %s\n", recvBuffer);
     }
 }
+
+void mandarBorrado() {
+    if (this == NULL) {
+        printf("El libro no existe.\n");
+    }
+
+    printf("Borrando el libro con ISBN: %s\n", this->isbn);
+    delete this;
+}
+
