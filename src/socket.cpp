@@ -205,7 +205,7 @@ void enviarComandoRegistrarEditorial(SOCKET* s, Editorial& e) {
     int bytesRecibidos;
 
 	strcpy(sendBuffer, "REGISTRAR_EDITORIAL");
-	int bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
 	if (bytesEnviados == SOCKET_ERROR) {
 		fprintf(stderr, "Error al enviar comando REGISTRAR_EDITORIAL\n");
 		return;
@@ -225,7 +225,7 @@ void enviarComandoRegistrarEditorial(SOCKET* s, Editorial& e) {
 		return;
 	}
 
-	int bytesRecibidos = recv(*s, recvBuffer, sizeof(recvBuffer) - 1, 0);
+	bytesRecibidos = recv(*s, recvBuffer, sizeof(recvBuffer) - 1, 0);
 	if (bytesRecibidos == SOCKET_ERROR) {
 		fprintf(stderr, "Error al recibir datos del servidor\n");
 		return;

@@ -7,12 +7,15 @@
 
 #include <stdio.h> 
 #include <stdlib.h>
+#include "menu.h"
+#include "../include/Autor.h"
+#include "../include/Categoria.h"
+#include "../include/Editorial.h"
+#include "../include/Libro.h"
 
-#include "../include/autor.h"
-#include "../include/categoria.h"
-#include "../include/editorial.h"
-#include "../include/libro.h"
 //#include "../include/sqlManager.h"
+
+
 
 void imprimirMenuPrincipal(){ 		//Funcion para imprimir el menu principal
 	
@@ -65,7 +68,7 @@ void gestionarSubmenus(int n) { //Funcion para gestionar los submenus
 		case 4:
 		  MenuRegistrarAutor();
 		  break;
-
+/*
 	    case 5:
 		    MenuRegistrarEditorial();
 		  break;
@@ -74,7 +77,7 @@ void gestionarSubmenus(int n) { //Funcion para gestionar los submenus
 		
 		  MenuRegistrarCategoria();
 		  break;
-
+*/
 		case 7:
 		printf("Saliendo...\n");
 		fflush(stdout);
