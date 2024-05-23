@@ -257,7 +257,4 @@ void enviarComandoBorrarLibro(SOCKET* s, char* isbn) {
 		fprintf(stderr, "Error al enviar el isbn\n");
 		return;
 	}
-
-
 }
-
