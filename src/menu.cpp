@@ -53,7 +53,7 @@ int seleccionarOpcionMenus() { //Funcion para seleccionar una opcion del menu
 
 }
 
-void gestionarSubmenus(int n) { //Funcion para gestionar los submenus
+void gestionarSubmenus(int n, SOCKET* s) { //Funcion para gestionar los submenus
 
 	switch (n) {
 	    case 1:
@@ -65,20 +65,20 @@ void gestionarSubmenus(int n) { //Funcion para gestionar los submenus
 	      break;
 
 	    case 3:
-		  MenuBorrarLibro();
+		  MenuBorrarLibro(s);
 		  break;
 
 		case 4:
-		  MenuRegistrarAutor();
+		  MenuRegistrarAutor(s);
 		  break;
 
 	    case 5:
-		    MenuRegistrarEditorial();
+		    MenuRegistrarEditorial(s);
 		  break;
 
 		case 6:
 		
-		  MenuRegistrarCategoria();
+		  MenuRegistrarCategoria(s);
 		  break;
 
 		case 7:
