@@ -4,7 +4,7 @@
  *  Created on: 18 may 2024
  *      Author: mikel
  */
-//#include "../include/menu.h"
+
 #include <stdio.h> 
 #include <stdlib.h>
 
@@ -12,7 +12,7 @@
 #include "../include/categoria.h"
 #include "../include/editorial.h"
 #include "../include/libro.h"
-#include "../include/sqlManager.h"
+//#include "../include/sqlManager.h"
 
 void imprimirMenuPrincipal(){ 		//Funcion para imprimir el menu principal
 	
@@ -90,7 +90,7 @@ void gestionarSubmenus(int n) { //Funcion para gestionar los submenus
 				"############################\n"
 			);
 			fflush(stdout);
-			sleep(1);
+			//sleep(1);
 			
 			
 
@@ -215,4 +215,69 @@ void MenuSubir(){ //Funcion para subir un libro
 		insertarLibro(*objLibro);
 		destruir_libro(objLibro);
 	}*/
+}
+
+void MenuBorrarLibro(){ //Funcion para borrar un libro
+	system("cls");
+	char isbn[50];
+	printf(
+		"############################\n"
+		"#        Introducir        #\n"
+		"#          ISBN            #\n"
+		"############################\n"
+		"#     Inserte el ISBN      #\n"
+		"############################\n"
+	);
+	fflush(stdout);
+	scanf("%s", isbn);
+	system("cls");
+	//borrarLibro(isbn);
+}
+
+
+void MenuRegistrarAutor(){ //Funcion para registrar un autor
+	system("cls");
+	char nombre[50];
+	char apellido[50];
+	char fecha[5];
+	printf(
+		"############################\n"
+		"#        Introducir        #\n"
+		"#          Nombre          #\n"
+		"############################\n"
+		"#     Inserte el nombre    #\n"
+		"############################\n"
+	);
+	fflush(stdout);
+	scanf("%s", nombre);
+	system("cls");
+
+	printf(
+		"############################\n"
+		"#        Introducir        #\n"
+		"#         Apellido         #\n"
+		"############################\n"
+		"#     Inserte el apellido  #\n"
+		"############################\n"
+	);
+	fflush(stdout);
+	scanf("%s", apellido);
+	system("cls");
+
+	printf(
+		"############################\n"
+		"#        Introducir        #\n"
+		"#          Fecha           #\n"
+		"############################\n"
+		"#      Inserte anyo        #\n"
+		"#      de nacimiento       #\n"
+		"############################\n"
+	);
+	fflush(stdout);
+	scanf("%s", fecha);
+	system("cls");
+	//Autor* objAutor;
+	//objAutor = crear_autor(nombre, apellido, fecha);
+	//insertarAutor(*objAutor);
+	//destruir_autor(objAutor);
 }
