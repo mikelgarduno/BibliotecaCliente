@@ -53,95 +53,209 @@ int inicializarSocket(SOCKET* s){
 void enviarComandoRegistrarAutor(SOCKET* s, Autor& a){
 	char sendBuffer[1024];
 	char recvBuffer[1024];
+	int bytesEnviados;
+    int bytesRecibidos;
 
 	strcpy(sendBuffer, "REGISTRAR_AUTOR");
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar comando REGISTRAR_AUTOR\n");
+		return;
+	}
 
 	strcpy(sendBuffer, a.getName());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar el nombre del autor\n");
+		return;
+	}
 
 	strcpy(sendBuffer, a.getDate());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar la fecha del autor\n");
+		return;
+	}
 
 	strcpy(sendBuffer, a.getPlace());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar el lugar del autor\n");
+		return;
+	}
 }
 
 void enviarComandoRegistrarLibro(SOCKET* s, Libro& l){
 	char sendBuffer[1024]; char recvBuffer[1024];
-	strcpy(sendBuffer, "REGISTRAR_LIBRO");
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	int bytesEnviados;
+    int bytesRecibidos;
 
+	strcpy(sendBuffer, "REGISTRAR_LIBRO");
+	bytesEnviados= send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar comando REGISTRAR_LIBRO\n");
+		return;
+	}
 	strcpy(sendBuffer, l.getTitulo());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados= send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar el titulo\n");
+		return;
+	}
 
 	strcpy(sendBuffer, l.getIsbn());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados= send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar el isbn\n");
+		return;
+	}
 
 	strcpy(sendBuffer, l.getAutor()->getName());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados= send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar el nombre del autor\n");
+		return;
+	}
+	
 	strcpy(sendBuffer, l.getAutor()->getDate());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados= send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar la fecha del autor\n");
+		return;
+	}
 	strcpy(sendBuffer, l.getAutor()->getPlace());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados= send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar el lugar del autor\n");
+		return;
+	}
 
 	strcpy(sendBuffer, l.getEditorial()->getName());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados= send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar el nombre de la editorial\n");
+		return;
+	}
 	strcpy(sendBuffer, l.getEditorial()->getFecha());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar la fecha de la editorial\n");
+		return;
+	}
 
 	strcpy(sendBuffer, l.getFechaCreacion());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar la fecha de creacion del libro\n");
+		return;
+	}
 
 	strcpy(sendBuffer, l.getCategoria()->getName());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar el nombre de la categoria\n");
+		return;
+	}
 
 	strcpy(sendBuffer, l.getContenido());
-	send(*s, sendBuffer, strlen(sendBuffer), 0);
+	bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar el contenido del libro\n");
+		return;
+	}
 }
 void enviarComandoRegistrarCategoria(SOCKET* s, Categoria& c) {
     char sendBuffer[1024];
-    char recvBuffer[1024];
+    char recvBuffer[1024]; 
+	int bytesEnviados;
+    int bytesRecibidos;
 
     strcpy(sendBuffer, "REGISTRAR_CATEGORIA");
-    send(*s, sendBuffer, strlen(sendBuffer), 0);
+    bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+    if (bytesEnviados == SOCKET_ERROR) {
+        fprintf(stderr, "Error al enviar comando REGISTRAR_CATEGORIA\n");
+        return;
+    }
 
     strcpy(sendBuffer, c.getName());
-    send(*s, sendBuffer, strlen(sendBuffer), 0);
+    bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+        fprintf(stderr, "Error al enviar el nombre\n");
+        return;
+    }
 
-    int bytesRecibidos = recv(*s, recvBuffer, 1024, 0);
-    if (bytesRecibidos > 0) {
-        recvBuffer[bytesRecibidos] = '\0';
+    bytesRecibidos = recv(*s, recvBuffer, sizeof(recvBuffer) - 1, 0);
+    if (bytesRecibidos == SOCKET_ERROR) {
+        fprintf(stderr, "Error al recibir datos del servidor\n");
+        return;
+    }
+	if (bytesRecibidos > 0) {
+        recvBuffer[bytesRecibidos] = '\0'; // Terminar la cadena recibida
         printf("Respuesta del servidor: %s\n", recvBuffer);
-	}
+    } else {
+        fprintf(stderr, "El servidor cerró la conexión o no se recibieron datos\n");
+    }
+
 }
 
 void enviarComandoRegistrarEditorial(SOCKET* s, Editorial& e) {
-    char sendBuffer[1024];
-    char recvBuffer[1024];
+	char sendBuffer[1024];
+	char recvBuffer[1024];
+	int bytesEnviados;
+    int bytesRecibidos;
 
-    strcpy(sendBuffer, "REGISTRAR_EDITORIAL");
-    send(*s, sendBuffer, strlen(sendBuffer), 0);
+	strcpy(sendBuffer, "REGISTRAR_EDITORIAL");
+	int bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar comando REGISTRAR_EDITORIAL\n");
+		return;
+	}
 
-    strcpy(sendBuffer, e.getName());
-    send(*s, sendBuffer, strlen(sendBuffer), 0);
+	strcpy(sendBuffer, e.getName());
+	bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar el nombre de la editorial\n");
+		return;
+	}
 
-    strcpy(sendBuffer, e.getFecha());
-    send(*s, sendBuffer, strlen(sendBuffer), 0);
+	strcpy(sendBuffer, e.getFecha());
+	bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar la fecha de la editorial\n");
+		return;
+	}
 
-    int bytesRecibidos = recv(*s, recvBuffer, 1024, 0);
-    if (bytesRecibidos > 0) {
-        recvBuffer[bytesRecibidos] = '\0';
-        printf("Respuesta del servidor: %s\n", recvBuffer);
-    }
+	int bytesRecibidos = recv(*s, recvBuffer, sizeof(recvBuffer) - 1, 0);
+	if (bytesRecibidos == SOCKET_ERROR) {
+		fprintf(stderr, "Error al recibir datos del servidor\n");
+		return;
+	}
+	if (bytesRecibidos > 0) {
+		recvBuffer[bytesRecibidos] = '\0';
+		printf("Respuesta del servidor: %s\n", recvBuffer);
+	} else {
+		fprintf(stderr, "El servidor cerró la conexión o no se recibieron datos\n");
+	}
 }
 
-void mandarBorrado() {
-    if (this == NULL) {
-        printf("El libro no existe.\n");
-    }
+void enviarComandoBorrarLibro(SOCKET* s, char* isbn) {
+    char sendBuffer[1024]; char recvBuffer[1024];
+	int bytesEnviados;
+    int bytesRecibidos;
+	strcpy(sendBuffer, "BORRAR_LIBRO");
+	bytesEnviados= send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar comando BORRAR_LIBRO\n");
+		return;
+	}
 
-    printf("Borrando el libro con ISBN: %s\n", this->isbn);
-    delete this;
+	strcpy(sendBuffer, isbn);
+	bytesEnviados= send(*s, sendBuffer, strlen(sendBuffer), 0);
+	if (bytesEnviados == SOCKET_ERROR) {
+		fprintf(stderr, "Error al enviar el isbn\n");
+		return;
+	}
+
+
 }
 
