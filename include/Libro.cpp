@@ -6,7 +6,11 @@
  */
 
 #include "Libro.h"
+#include <iostream>
+#include <cstring>
 #include <string.h>
+
+using namespace std;
 
 Libro::Libro() {
 	this->isbn= new char[1];
@@ -57,3 +61,79 @@ Libro::Libro(const Libro &other) {
 
 }
 
+char* Libro::getIsbn(){
+	return this->isbn;
+
+}
+char* Libro::getTitulo(){
+	return this->titulo;
+
+}
+char* Libro::getFechaCreacion(){
+	return this->fechaCreacion;
+}
+
+Autor* Libro::getAutor(){
+	return this->autor;
+}
+
+Editorial* Libro::getEditorial(){
+	return this->editorial;
+}
+
+Categoria* Libro::getCategoria(){
+	return this->categoria;
+}
+
+char* Libro::getContenido(){
+	return this->contenido;
+}
+
+void Libro::setIsbn(char* isbn){
+	delete[] this->isbn;
+	this->isbn = new char[strlen(isbn)+1];
+	strcpy(this->isbn, isbn);
+}
+
+void Libro::setTitulo(const char *titulo){
+	delete[] this->titulo;
+	this->titulo = new char[strlen(titulo)+1];
+	strcpy(this->titulo, titulo);
+}
+
+void Libro::setFechaCreacion(char* fechaCreacion){
+	delete[] this->fechaCreacion;
+	this->fechaCreacion = new char[strlen(fechaCreacion)+1];
+	strcpy(this->fechaCreacion, fechaCreacion);
+}
+
+void Libro::setAutor(Autor *autor){
+	delete this->autor;
+	this->autor = new Autor(*autor);
+}
+void Libro::setEditorial(Editorial *editorial){
+	delete this->editorial;
+	this->editorial = new Editorial(*editorial);
+}
+
+void Libro::setCategoria(Categoria *categoria){
+	delete this->categoria;
+	this->categoria = new Categoria(*categoria);
+}
+
+void Libro::setContenido(char* contenido){
+	delete[] this->contenido;
+	this->contenido = new char[strlen(contenido)+1];
+	strcpy(this->contenido, contenido);
+}
+
+void Libro::imprimirLibro(){
+	cout << "ISBN: " << this->isbn << endl;
+	cout << "Título: " << this->titulo << endl;
+	cout << "Fecha de Creación: " << this->fechaCreacion << endl;
+	cout << "Autor: " << this->autor->getName() << endl;
+	cout << "Editorial: " << this->editorial->getName() << endl;
+	cout << "Categoría: " << this->categoria->getName() << endl;
+	cout << "Contenido: " << this->contenido << endl;
+}
+	

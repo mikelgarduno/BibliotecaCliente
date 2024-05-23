@@ -10,6 +10,8 @@
 #include <winsock2.h>
 #include "../include/Autor.h"
 #include "../include/Libro.h"
+#include "../include/Categoria.h"
+#include "../include/Editorial.h"
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
@@ -19,7 +21,7 @@ void enviarComandoRegistrarAutor(SOCKET* s, Autor& a);
 void enviarComandoRegistrarLibro(SOCKET* s, Libro& l);
 void enviarComandoRegistrarCategoria(SOCKET* s, Categoria& c);
 void enviarComandoRegistrarEditorial(SOCKET* s, Editorial& e);
-void mandarBorrado();
+void enviarComandoBorrarLibro(SOCKET* s, char* isbn);
 
 //Autor* pedirListaAutores ();
 //Libro* pedirListaLibros ();

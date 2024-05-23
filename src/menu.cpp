@@ -12,6 +12,9 @@
 #include "../include/Categoria.h"
 #include "../include/Editorial.h"
 #include "../include/Libro.h"
+#include "socket.h"
+#include <winsock2.h>
+#include <windows.h>
 
 //#include "../include/sqlManager.h"
 
@@ -68,7 +71,7 @@ void gestionarSubmenus(int n) { //Funcion para gestionar los submenus
 		case 4:
 		  MenuRegistrarAutor();
 		  break;
-/*
+
 	    case 5:
 		    MenuRegistrarEditorial();
 		  break;
@@ -77,7 +80,7 @@ void gestionarSubmenus(int n) { //Funcion para gestionar los submenus
 		
 		  MenuRegistrarCategoria();
 		  break;
-*/
+
 		case 7:
 		printf("Saliendo...\n");
 		fflush(stdout);
@@ -220,7 +223,7 @@ void MenuSubir(){ //Funcion para subir un libro
 	}*/
 }
 
-void MenuBorrarLibro(){ //Funcion para borrar un libro
+void MenuBorrarLibro(SOCKET* s){ //Funcion para borrar un libro
 	system("cls");
 	char isbn[50];
 	printf(
@@ -234,14 +237,14 @@ void MenuBorrarLibro(){ //Funcion para borrar un libro
 	fflush(stdout);
 	scanf("%s", isbn);
 	system("cls");
-	//borrarLibro(isbn);
+	enviarComandoBorrarLibro(s, isbn);
 }
 
 
-void MenuRegistrarAutor(){ //Funcion para registrar un autor
+void MenuRegistrarAutor(SOCKET* s){ //Funcion para registrar un autor
 	system("cls");
 	char nombre[50];
-	char apellido[50];
+	char lugar[50];
 	char fecha[5];
 	printf(
 		"############################\n"
@@ -258,13 +261,13 @@ void MenuRegistrarAutor(){ //Funcion para registrar un autor
 	printf(
 		"############################\n"
 		"#        Introducir        #\n"
-		"#         Apellido         #\n"
+		"#     Lugar nacimiento     #\n"
 		"############################\n"
-		"#     Inserte el apellido  #\n"
+		"#     Inserte el lugar  #\n"
 		"############################\n"
 	);
 	fflush(stdout);
-	scanf("%s", apellido);
+	scanf("%s", lugar);
 	system("cls");
 
 	printf(
@@ -279,8 +282,60 @@ void MenuRegistrarAutor(){ //Funcion para registrar un autor
 	fflush(stdout);
 	scanf("%s", fecha);
 	system("cls");
-	//Autor* objAutor;
-	//objAutor = crear_autor(nombre, apellido, fecha);
-	//insertarAutor(*objAutor);
-	//destruir_autor(objAutor);
+	Autor* objAutor;
+	objAutor->setDate(fecha);
+	objAutor->setName(nombre);
+	objAutor->setPlace(lugar);
+	enviarComandoRegistrarAutor(s, *objAutor);
+}
+
+void MenuRegistrarEditorial(SOCKET* s){
+	system("cls");
+	char nombre[50];
+	char fecha[50];
+	printf(
+		"############################\n"
+		"#        Introducir        #\n"
+		"#          Nombre          #\n"
+		"############################\n"
+		"#     Inserte el nombre    #\n"
+		"############################\n"
+	);
+	fflush(stdout);
+	scanf("%s", nombre);
+	system("cls");
+	printf(
+		"############################\n"
+		"#        Introducir        #\n"
+		"#          Fecha           #\n"
+		"############################\n"
+		"#     Inserte el fecha     #\n"
+		"############################\n"
+	);
+	fflush(stdout);
+	scanf("%s", fecha);
+	system("cls");
+	Editorial* objEditorial;
+	objEditorial->setFecha(fecha);
+	objEditorial->setName(nombre);
+	enviarComandoRegistrarEditorial(s, *objEditorial);
+}
+
+void MenuRegistrarCategoria(SOCKET* s){
+	system("cls");
+	char nombre[50];
+	printf(
+		"############################\n"
+		"#        Introducir        #\n"
+		"#          Nombre          #\n"
+		"############################\n"
+		"#     Inserte el nombre    #\n"
+		"############################\n"
+	);
+	fflush(stdout);
+	scanf("%s", nombre);
+	system("cls");
+	Categoria* objCategoria;
+	objCategoria->setName(nombre);
+	enviarComandoRegistrarCategoria(s, *objCategoria);
 }

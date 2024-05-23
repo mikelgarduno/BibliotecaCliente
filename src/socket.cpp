@@ -8,6 +8,8 @@
 #include "socket.h"
 #include "../include/Autor.h"
 #include "../include/Libro.h"
+#include "../include/Categoria.h"
+#include "../include/Editorial.h"
 #include <iostream>
 
 
