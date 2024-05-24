@@ -292,15 +292,9 @@ void mandarComandoBiblioteca(SOCKET* s) {
         return;
     }
 
-    // Recibir y mostrar cada lista
-    printf("Libros:\n");
-    recibirYMostrarLista(*s);
-    printf("Autores:\n");
-    recibirYMostrarLista(*s);
-    printf("Categorías:\n");
-    recibirYMostrarLista(*s);
-    printf("Editoriales:\n");
-    recibirYMostrarLista(*s);
+    // Recibir y mostrar las listas
+    recibirYMostrarListas(*s);
+
 
     // Recibir y mostrar la respuesta final
 
@@ -315,32 +309,21 @@ void mandarComandoBiblioteca(SOCKET* s) {
     }
 }
 
-void recibirYMostrarLista(SOCKET s) {
-    int length;
-    char* buffer;
+void recibirYMostrarListas(SOCKET s) {
+    char recvBuffer[4096]; // Ajusta el tamaño según tus necesidades
+    int bytesRecibidos;
 
-    // Recibir la longitud de la lista
-    int bytesRecibidos = recv(s, (char*)&length, sizeof(length), 0);
+    // Recibir datos
+    bytesRecibidos = recv(s, recvBuffer, sizeof(recvBuffer), 0);
     if (bytesRecibidos == SOCKET_ERROR) {
-        fprintf(stderr, "Error al recibir la longitud de la lista\n");
+        fprintf(stderr, "Error al recibir datos del servidor\n");
         return;
     }
 
-    // Asignar memoria para la lista y recibir los datos
-    buffer = (char*)malloc(length + 1);
-    if (buffer == NULL) {
-        fprintf(stderr, "Error al asignar memoria para la lista\n");
-        return;
+    // Separar los datos en listas
+    char* lista = strtok(recvBuffer, "\n");
+    while (lista != NULL) {
+        printf("%s\n", lista);
+        lista = strtok(NULL, "\n");
     }
-
-    bytesRecibidos = recv(s, buffer, length, 0);
-    if (bytesRecibidos == SOCKET_ERROR) {
-        fprintf(stderr, "Error al recibir los datos de la lista\n");
-        free(buffer);
-        return;
-    }
-
-    buffer[length] = '\0'; // Terminar la cadena
-    printf("%s\n", buffer);
-    free(buffer);
 }
