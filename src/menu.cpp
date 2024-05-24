@@ -285,7 +285,7 @@ void MenuRegistrarAutor(SOCKET* s){
 	fflush(stdout);
 	scanf("%s", fecha);
 	system("cls");
-	Autor* objAutor;
+	Autor* objAutor = new Autor();
 	objAutor->setDate(fecha);
 	objAutor->setName(nombre);
 	objAutor->setPlace(lugar);
@@ -320,7 +320,7 @@ void MenuRegistrarEditorial(SOCKET* s){
 	scanf("%s", fecha);
 	system("cls");
 
-	Editorial* objEditorial;
+	Editorial* objEditorial = new Editorial();
 	objEditorial->setFecha(fecha);
 	objEditorial->setName(nombre);
 	enviarComandoRegistrarEditorial(s, *objEditorial);
