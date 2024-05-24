@@ -13,13 +13,13 @@ void imprimirMenuPrincipal();
 int seleccionarOpcionMenus();
 void gestionarSubmenus(int n, SOCKET* s);
 
-void MenuDescargar();
-void MenuSubir();
-void MenuModificar();
+void MenuDescargar(SOCKET* s);
+void MenuSubir(SOCKET* s);
+void MenuBorrarLibro(SOCKET* s);
 void MenuRegistrarAutor(SOCKET* s);
 void MenuRegistrarEditorial(SOCKET* s);
 void MenuRegistrarCategoria(SOCKET* s);
-void MenuBorrarLibro(SOCKET* s);
+
 
 
 
