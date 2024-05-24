@@ -22,11 +22,10 @@ void enviarComandoRegistrarLibro(SOCKET* s, Libro& l);
 void enviarComandoRegistrarCategoria(SOCKET* s, Categoria& c);
 void enviarComandoRegistrarEditorial(SOCKET* s, Editorial& e);
 void enviarComandoBorrarLibro(SOCKET* s, char* isbn);
+void enviarComandoBuscarISBN(SOCKET* s, char* isbn);
+void mandarComandoBiblioteca(SOCKET* s);
+void recibirYMostrarLista(SOCKET s);
 
-//Autor* pedirListaAutores ();
-//Libro* pedirListaLibros ();
-//Categoria* pedirListaCategorias ();
-//Editorial* pedirListaAutores ();
 
 
 #endif /* SOCKET_H_ */

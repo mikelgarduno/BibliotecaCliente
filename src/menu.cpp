@@ -26,7 +26,7 @@ printf(
 		"############################\n" 
 		"#                          #\n" 
 	 	"#  1. Descargar Libro      #\n" 
-		"#  2. Subir Libro          #\n" 
+		"#  2. Obtener Biblioteca   #\n" 
 		"#  3. Borrar Libro         #\n"
 		"#  4. Registrar Autor      #\n" 
 		"#  5. Registrar Editorial  #\n" 
@@ -53,11 +53,11 @@ void gestionarSubmenus(int n, SOCKET* s) {
 
 	switch (n) {
 	    case 1:
-	      MenuDescargar(s);
+	      MenuDescargar();
 	      break;
 
 	    case 2:
-	      MenuSubir(s);
+	      MenuBiblioteca(s);
 	      break;
 
 	    case 3:
@@ -93,136 +93,26 @@ void gestionarSubmenus(int n, SOCKET* s) {
 			);
 			fflush(stdout);
 			sleep(1);
-			
-			
-
 	}
 
 }
 //Funcion para descargar un libro
-void MenuDescargar(SOCKET* s) { 
-system("cls");
-	int opcion;
-
-	printf("############################\n");
-	printf("#--------------------------#\n");
-    printf("Buscar por:\n");
-    printf("1) Autor\n");
-    printf("2) Titulo\n");
-    printf("3) Categoria\n");
-    printf("4) Editorial\n");
-	printf("#--------------------------#\n");
-	printf("############################\n");
-    printf("Ingrese el numero correspondiente a la opcion deseada: ");
-	fflush(stdout);
-    scanf("%d", &opcion);
-	
-	switch (opcion) {
-        case 1:
-		printf("Buscando por autor\n");
-		fflush(stdout);
-		//enviarComandoBuscarPorAutor(s);
-			//buscarPorAutor();
-            break;
-        case 2:
-		printf("Buscando por titulo\n");
-		fflush(stdout);
-		//enviarComandoBuscarPorTitulo(s);
-           // buscarPorTitulo();
-            break;
-        case 3:
-		printf("Buscando por categoria\n");
-		fflush(stdout);
-		//enviarComandoBuscarPorCategoria(s);
-           // buscarPorCategoria();
-            break;
-        case 4:
-		printf("Buscando por editorial\n");
-		fflush(stdout);
-		//enviarComandoBuscarPorEditorial(s);
-            //buscarPorEditorial();
-            break;
-        default:
-            printf("### Opción no válida ###\n");
-            fflush(stdout);
-			
-    }
-}
- //Funcion para subir un libro
-void MenuSubir(SOCKET* s){
+void MenuDescargar() { 
 	system("cls");
-	printf("Recuerde que para subir un libro, es necesario\nhaber registrado previamente el autor, la \neditorial y la categoria\n");
+	printf("Que titulo quieres poner a tu libro: \n");
 	fflush(stdout);
-	char isbn[50];
 	char titulo[50];
-	int autor;
-	int categoria;
-	int editorial;
-	char fecha[5];
+	scanf(" %[^\n]", titulo);
+	printf("Dime el contenido del libro:\n");
+	fflush(stdout);
 	char contenido[5000];
+	scanf(" %[^\n]", contenido);
+	descargarLibro(titulo, contenido);
+}
 
-
-	printf(
-		"############################\n"
-		"#        Introducir        #\n"
-		"#          ISBN            #\n"
-		"############################\n"
-		"#     Inserte el ISBN      #\n"
-		"############################\n"
-	);
-	fflush(stdout);
-	scanf("%s", isbn);
-	system("cls");
-
-	printf(
-		"############################\n"
-		"#        Introducir        #\n"
-		"#          Titulo          #\n"
-		"############################\n"
-		"# Inserte nombre completo  #\n"
-		"############################\n"
-	);
-	fflush(stdout);
-	scanf("%[^\n]s", titulo);
-	system("cls");
-
-	printf(
-		"############################\n"
-		"#        Introducir        #\n"
-		"#          Fecha           #\n"
-		"############################\n"
-		"#      Inserte anyo        #\n"
-		"#      de publicacion      #\n"
-		"############################\n"
-	);
-	fflush(stdout);
-	scanf("%s", fecha);
-	system("cls");
-
-	printf(
-		"############################\n"
-		"#        Introducir        #\n"
-		"#        Contenido         #\n"
-		"############################\n"
-		"#      Inserte texto       #\n"
-		"############################\n"
-	);
-	fflush(stdout);
-	scanf("%[^\n]s", contenido);
-	system("cls");
-	
-	//autor =  seleccionarAutor();
-	//categoria = seleccionarCategoria();
-	//editorial = seleccionarEditorial();
-	Libro* objLibro;
-	objLibro->setIsbn(isbn);
-	objLibro->setTitulo(titulo);
-	objLibro->setFechaCreacion(fecha);
-	objLibro->setContenido(contenido);
-	//objLibro->setAutor(autor);
-	//objLibro->setCategoria(categoria);
-	//objLibro->setEditorial(editorial);
-	//enviarComandoSubirLibro(s, *objLibro);
+ //Funcion para subir un libro
+void MenuBiblioteca(SOCKET* s){
+	mandarComandoBiblioteca(s);
 }
 
 //Menu para borrar un libro

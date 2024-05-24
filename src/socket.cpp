@@ -278,3 +278,69 @@ void enviarComandoBorrarLibro(SOCKET* s, char* isbn) {
 		fprintf(stderr, "El servidor cerró la conexión o no se recibieron datos\n");
 	}
 }
+
+
+void mandarComandoBiblioteca(SOCKET* s) {
+	char sendBuffer[1024];
+	char recvBuffer[1024];
+
+    strcpy(sendBuffer, "BIBLIOTECA");
+
+    int bytesEnviados = send(*s, sendBuffer, strlen(sendBuffer), 0);
+    if (bytesEnviados == SOCKET_ERROR) {
+        fprintf(stderr, "Error al enviar comando BIBLIOTECA\n");
+        return;
+    }
+
+    // Recibir y mostrar cada lista
+    printf("Libros:\n");
+    recibirYMostrarLista(*s);
+    printf("Autores:\n");
+    recibirYMostrarLista(*s);
+    printf("Categorías:\n");
+    recibirYMostrarLista(*s);
+    printf("Editoriales:\n");
+    recibirYMostrarLista(*s);
+
+    // Recibir y mostrar la respuesta final
+
+    int bytesRecibidos = recv(*s, recvBuffer, sizeof(recvBuffer) - 1, 0);
+    if (bytesRecibidos == SOCKET_ERROR) {
+        fprintf(stderr, "Error al recibir datos del servidor\n");
+    } else if (bytesRecibidos > 0) {
+        recvBuffer[bytesRecibidos] = '\0';
+        printf("Respuesta del servidor: %s\n", recvBuffer);
+    } else {
+        fprintf(stderr, "El servidor cerró la conexión o no se recibieron datos\n");
+    }
+}
+
+void recibirYMostrarLista(SOCKET s) {
+    int length;
+    char* buffer;
+
+    // Recibir la longitud de la lista
+    int bytesRecibidos = recv(s, (char*)&length, sizeof(length), 0);
+    if (bytesRecibidos == SOCKET_ERROR) {
+        fprintf(stderr, "Error al recibir la longitud de la lista\n");
+        return;
+    }
+
+    // Asignar memoria para la lista y recibir los datos
+    buffer = (char*)malloc(length + 1);
+    if (buffer == NULL) {
+        fprintf(stderr, "Error al asignar memoria para la lista\n");
+        return;
+    }
+
+    bytesRecibidos = recv(s, buffer, length, 0);
+    if (bytesRecibidos == SOCKET_ERROR) {
+        fprintf(stderr, "Error al recibir los datos de la lista\n");
+        free(buffer);
+        return;
+    }
+
+    buffer[length] = '\0'; // Terminar la cadena
+    printf("%s\n", buffer);
+    free(buffer);
+}
