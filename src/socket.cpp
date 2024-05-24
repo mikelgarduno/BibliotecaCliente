@@ -299,8 +299,8 @@ void recibirYMostrarListas(SOCKET s) {
 }
 
 void mandarComandoBiblioteca(SOCKET* s) {
-	char sendBuffer[1024];
-	char recvBuffer[1024];
+	char sendBuffer[4096];
+	char recvBuffer[4096];
 
     strcpy(sendBuffer, "BIBLIOTECA");
 
