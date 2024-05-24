@@ -250,7 +250,8 @@ void enviarComandoRegistrarEditorial(SOCKET* s, Editorial& e) {
 }
 
 void enviarComandoBorrarLibro(SOCKET* s, char* isbn) {
-    char sendBuffer[1024]; char recvBuffer[1024];
+    char sendBuffer[1024];
+	char recvBuffer[1024];
 	int bytesEnviados;
     int bytesRecibidos;
 	strcpy(sendBuffer, "BORRAR_LIBRO");
@@ -265,5 +266,15 @@ void enviarComandoBorrarLibro(SOCKET* s, char* isbn) {
 	if (bytesEnviados == SOCKET_ERROR) {
 		fprintf(stderr, "Error al enviar el isbn\n");
 		return;
+	}
+
+	bytesRecibidos = recv(*s, recvBuffer, sizeof(recvBuffer) - 1, 0);
+	if (bytesRecibidos == SOCKET_ERROR) {
+		fprintf(stderr, "Error al recibir datos del servidor\n");
+	} else if (bytesRecibidos > 0) {
+		recvBuffer[bytesRecibidos] = '\0'; 
+		printf("Respuesta del servidor: %s\n", recvBuffer);
+	} else {
+		fprintf(stderr, "El servidor cerró la conexión o no se recibieron datos\n");
 	}
 }
