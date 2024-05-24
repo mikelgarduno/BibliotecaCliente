@@ -37,6 +37,9 @@ int inicializarSocket(SOCKET* s){
 	if (connect(*s, (struct sockaddr*) &server, sizeof(server)) == SOCKET_ERROR) {
 		cout << "Error al conectar el socket. Codigo de error: "
 				<< WSAGetLastError() << endl;
+		if(WSAGetLastError() == 10061){
+			cout << "El servidor se encuentra disponible\nReinicie el programa\n\n" << endl;
+		}
 		closesocket(*s);
 		WSACleanup();
 		return -1;
@@ -80,6 +83,17 @@ void enviarComandoRegistrarAutor(SOCKET* s, Autor& a){
 		fprintf(stderr, "Error al enviar el lugar del autor\n");
 		return;
 	}
+
+	bytesRecibidos = recv(*s, recvBuffer, sizeof(recvBuffer) - 1, 0);
+	if (bytesRecibidos == SOCKET_ERROR) {
+		fprintf(stderr, "Error al recibir datos del servidor\n");
+		return;
+	} else if (bytesRecibidos > 0) {
+		recvBuffer[bytesRecibidos] = '\0'; 
+		printf("Respuesta del servidor: %s\n", recvBuffer);
+	} else {
+		fprintf(stderr, "El servidor cerró la conexión o no se recibieron datos\n");
+	} 
 }
 
 void enviarComandoRegistrarLibro(SOCKET* s, Libro& l){
