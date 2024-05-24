@@ -1,9 +1,4 @@
-/*
- * socket.cpp
- *
- *  Created on: 18 may 2024
- *      Author: mikel
- */
+
 #include <winsock2.h>
 #include "socket.h"
 #include "../include/Autor.h"

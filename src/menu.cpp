@@ -1,9 +1,4 @@
-/*
- * menu.cpp
- *
- *  Created on: 18 may 2024
- *      Author: mikel
- */
+
 
 #include <stdio.h> 
 #include <stdlib.h>
@@ -16,13 +11,10 @@
 #include <winsock2.h>
 #include <windows.h>
 
-//#include "../include/sqlManager.h"
 
 
-
-void imprimirMenuPrincipal(){ 		//Funcion para imprimir el menu principal
-	
-
+//Funcion para imprimir el menu principal
+void imprimirMenuPrincipal(){ 		
 printf(
 		"\n############################\n" 
 		"#//////////////////////////#\n"
@@ -36,8 +28,8 @@ printf(
 		"#  4. Registrar Autor      #\n" 
 		"#  5. Registrar Editorial  #\n" 
 		"#  6. Registrar Categoria  #\n" 
-		"#  7. Salir                #\n" 
-		"#                          #\n" 
+		"#  7. Borrar Libro         #\n" 
+		"#  8. Salir                #\n" 
 		"############################\n" 
 		"#      Inserte numero      #\n" 
 		"############################\n"
@@ -45,7 +37,8 @@ printf(
 fflush(stdout);
 }
 
-int seleccionarOpcionMenus() { //Funcion para seleccionar una opcion del menu
+//Funcion para seleccionar una opcion del menu
+int seleccionarOpcionMenus() { 
 	int input;
 	scanf("%d", &input);
 	fflush(stdin);
@@ -53,7 +46,8 @@ int seleccionarOpcionMenus() { //Funcion para seleccionar una opcion del menu
 
 }
 
-void gestionarSubmenus(int n, SOCKET* s) { //Funcion para gestionar los submenus
+ //Funcion para gestionar los submenus
+void gestionarSubmenus(int n, SOCKET* s) {
 
 	switch (n) {
 	    case 1:
@@ -104,7 +98,8 @@ void gestionarSubmenus(int n, SOCKET* s) { //Funcion para gestionar los submenus
 
 }
 
-void MenuDescargar() { //Funcion para descargar un libro
+//Funcion para descargar un libro
+void MenuDescargar() { 
 system("cls");
 	int opcion;
 
@@ -149,7 +144,8 @@ system("cls");
     }
 }
 
-void MenuSubir(){ //Funcion para subir un libro
+//Funcion para subir un libro
+void MenuSubir(){ 
 	system("cls");
 	printf("Recuerde que para subir un libro, es necesario\nhaber registrado previamente el autor, la editorial y la categoria\n");
 	fflush(stdout);
@@ -223,7 +219,8 @@ void MenuSubir(){ //Funcion para subir un libro
 	}*/
 }
 
-void MenuBorrarLibro(SOCKET* s){ //Funcion para borrar un libro
+//Funcion para borrar un libro
+void MenuBorrarLibro(SOCKET* s){ 
 	system("cls");
 	char isbn[50];
 	printf(
@@ -240,8 +237,8 @@ void MenuBorrarLibro(SOCKET* s){ //Funcion para borrar un libro
 	enviarComandoBorrarLibro(s, isbn);
 }
 
-
-void MenuRegistrarAutor(SOCKET* s){ //Funcion para registrar un autor
+ //Funcion para registrar un autor
+void MenuRegistrarAutor(SOCKET* s){
 	system("cls");
 	char nombre[50];
 	char lugar[50];
@@ -289,6 +286,7 @@ void MenuRegistrarAutor(SOCKET* s){ //Funcion para registrar un autor
 	enviarComandoRegistrarAutor(s, *objAutor);
 }
 
+//Menu para registrar una editorial
 void MenuRegistrarEditorial(SOCKET* s){
 	system("cls");
 	char nombre[50];
@@ -321,6 +319,7 @@ void MenuRegistrarEditorial(SOCKET* s){
 	enviarComandoRegistrarEditorial(s, *objEditorial);
 }
 
+//Menu para registrar una categoria
 void MenuRegistrarCategoria(SOCKET* s){
 	system("cls");
 	char nombre[50];

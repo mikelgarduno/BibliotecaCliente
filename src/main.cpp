@@ -1,20 +1,17 @@
-/*
- * main.cpp
- *
- *  Created on: 18 may 2024
- *      Author: mikel
- */
+
 #include "socket.h"
 #include "menu.h"
 #include <winsock2.h>
+#include <stdio.h>
 
 int main(void) {
+	printf("¡Bienvenido a la Biblioteca virtual del futuro!\n");
 	SOCKET s;
-	//inicializarSocket(&s);
+	inicializarSocket(&s);
+while (1){
 	imprimirMenuPrincipal();
-	int opcion = seleccionarOpcionMenus();
-	gestionarSubmenus(opcion);
-
+	gestionarSubmenus(seleccionarOpcionMenus(),&s);
+	}
 	return 0;
 }
 

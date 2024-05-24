@@ -11,7 +11,8 @@
 
 void imprimirMenuPrincipal();
 int seleccionarOpcionMenus();
-void gestionarSubmenus(int n);
+void gestionarSubmenus(int n, SOCKET* s);
+
 void MenuDescargar();
 void MenuSubir();
 void MenuModificar();
