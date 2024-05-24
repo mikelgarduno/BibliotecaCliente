@@ -341,7 +341,7 @@ void MenuRegistrarCategoria(SOCKET* s){
 	fflush(stdout);
 	scanf("%s", nombre);
 	system("cls");
-	Categoria* objCategoria;
+	Categoria* objCategoria = new Categoria();
 	objCategoria->setName(nombre);
 	enviarComandoRegistrarCategoria(s, *objCategoria);
 }
