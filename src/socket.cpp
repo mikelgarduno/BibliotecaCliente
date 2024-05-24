@@ -279,6 +279,24 @@ void enviarComandoBorrarLibro(SOCKET* s, char* isbn) {
 	}
 }
 
+void recibirYMostrarListas(SOCKET s) {
+    char recvBuffer[4096]; // Ajusta el tamaño según tus necesidades
+    int bytesRecibidos;
+
+    // Recibir datos
+    bytesRecibidos = recv(s, recvBuffer, sizeof(recvBuffer), 0);
+    if (bytesRecibidos == SOCKET_ERROR) {
+        fprintf(stderr, "Error al recibir datos del servidor\n");
+        return;
+    }
+
+    // Separar los datos en listas
+    char* lista = strtok(recvBuffer, "\n");
+    while (lista != NULL) {
+        printf("%s\n", lista);
+        lista = strtok(NULL, "\n");
+    }
+}
 
 void mandarComandoBiblioteca(SOCKET* s) {
 	char sendBuffer[1024];
@@ -306,24 +324,5 @@ void mandarComandoBiblioteca(SOCKET* s) {
         printf("Respuesta del servidor: %s\n", recvBuffer);
     } else {
         fprintf(stderr, "El servidor cerró la conexión o no se recibieron datos\n");
-    }
-}
-
-void recibirYMostrarListas(SOCKET s) {
-    char recvBuffer[4096]; // Ajusta el tamaño según tus necesidades
-    int bytesRecibidos;
-
-    // Recibir datos
-    bytesRecibidos = recv(s, recvBuffer, sizeof(recvBuffer), 0);
-    if (bytesRecibidos == SOCKET_ERROR) {
-        fprintf(stderr, "Error al recibir datos del servidor\n");
-        return;
-    }
-
-    // Separar los datos en listas
-    char* lista = strtok(recvBuffer, "\n");
-    while (lista != NULL) {
-        printf("%s\n", lista);
-        lista = strtok(NULL, "\n");
     }
 }
