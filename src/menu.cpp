@@ -1,9 +1,3 @@
-/*
- * menu.cpp
- *
- *  Created on: 18 may 2024
- *      Author: mikel
- */
 
 #include <stdio.h> 
 #include <stdlib.h>
@@ -16,6 +10,7 @@
 #include <winsock2.h>
 #include <windows.h>
 #include <unistd.h>
+#include <string>
 
 
 
@@ -126,25 +121,29 @@ system("cls");
         case 1:
 		printf("Buscando por autor\n");
 		fflush(stdout);
+		//enviarComandoBuscarPorAutor(s);
 			//buscarPorAutor();
             break;
         case 2:
 		printf("Buscando por titulo\n");
 		fflush(stdout);
+		//enviarComandoBuscarPorTitulo(s);
            // buscarPorTitulo();
             break;
         case 3:
 		printf("Buscando por categoria\n");
 		fflush(stdout);
+		//enviarComandoBuscarPorCategoria(s);
            // buscarPorCategoria();
             break;
         case 4:
 		printf("Buscando por editorial\n");
 		fflush(stdout);
+		//enviarComandoBuscarPorEditorial(s);
             //buscarPorEditorial();
             break;
         default:
-            printf("Opción no válida\n");
+            printf("### Opción no válida ###\n");
             fflush(stdout);
 			
     }
@@ -152,7 +151,7 @@ system("cls");
  //Funcion para subir un libro
 void MenuSubir(SOCKET* s){
 	system("cls");
-	printf("Recuerde que para subir un libro, es necesario\nhaber registrado previamente el autor, la editorial y la categoria\n");
+	printf("Recuerde que para subir un libro, es necesario\nhaber registrado previamente el autor, la \neditorial y la categoria\n");
 	fflush(stdout);
 	char isbn[50];
 	char titulo[50];
@@ -215,14 +214,17 @@ void MenuSubir(SOCKET* s){
 	//autor =  seleccionarAutor();
 	//categoria = seleccionarCategoria();
 	//editorial = seleccionarEditorial();
-
-	/*if(comprobarLibroExistente(isbn)==1){
-		Libro* objLibro;
-		objLibro = crear_libro(isbn, titulo, autor, editorial,categoria,fecha, contenido);
-		insertarLibro(*objLibro);
-		destruir_libro(objLibro);
-	}*/
+	Libro* objLibro;
+	objLibro->setIsbn(isbn);
+	objLibro->setTitulo(titulo);
+	objLibro->setFechaCreacion(fecha);
+	objLibro->setContenido(contenido);
+	//objLibro->setAutor(autor);
+	//objLibro->setCategoria(categoria);
+	//objLibro->setEditorial(editorial);
+	//enviarComandoSubirLibro(s, *objLibro);
 }
+
 //Menu para borrar un libro
 void MenuBorrarLibro(SOCKET* s){ 
 	system("cls");
@@ -311,12 +313,13 @@ void MenuRegistrarEditorial(SOCKET* s){
 		"#        Introducir        #\n"
 		"#          Fecha           #\n"
 		"############################\n"
-		"#     Inserte el fecha     #\n"
+		"#  Inserte anyo fundacion  #\n"
 		"############################\n"
 	);
 	fflush(stdout);
 	scanf("%s", fecha);
 	system("cls");
+
 	Editorial* objEditorial;
 	objEditorial->setFecha(fecha);
 	objEditorial->setName(nombre);
@@ -341,4 +344,22 @@ void MenuRegistrarCategoria(SOCKET* s){
 	Categoria* objCategoria;
 	objCategoria->setName(nombre);
 	enviarComandoRegistrarCategoria(s, *objCategoria);
+}
+
+
+#include <fstream> // Include the necessary header file
+#include <iostream>
+
+void descargarLibro(char* titulo, char* contenido){
+	std::string nombre = std::string(titulo) + ".txt";
+	std::ofstream file(nombre);
+
+	
+	if (file.is_open()) {
+		file << contenido;
+		file.close();
+		std::cout << "File created successfully: " << nombre << std::endl;
+	} else {
+		std::cout << "Failed to create file: " << nombre << std::endl;
+	}
 }

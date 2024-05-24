@@ -20,7 +20,7 @@ void MenuRegistrarAutor(SOCKET* s);
 void MenuRegistrarEditorial(SOCKET* s);
 void MenuRegistrarCategoria(SOCKET* s);
 
-
+void descargarLibro(char* titulo, char* contenido);
 
 
 #endif /* MENU_H_ */
