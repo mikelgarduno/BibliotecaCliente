@@ -347,7 +347,7 @@ void MenuRegistrarCategoria(SOCKET* s){
 }
 
 
-#include <fstream> // Include the necessary header file
+#include <fstream> 
 #include <iostream>
 
 void descargarLibro(char* titulo, char* contenido){
